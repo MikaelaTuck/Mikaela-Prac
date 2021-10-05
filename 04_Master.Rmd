@@ -1,4 +1,3 @@
----
 title: "Master script for postfire analysis"
 output: html_document
 ---
@@ -106,6 +105,8 @@ anova(fit_negexp, fit_negexpS)
 Q3: Which model is better?
 
 >*Answer 3:*
+<br>
+
 Q4: How many degrees of freedom are there in this ANOVA and why (i.e. what are they)?
 
 >*Answer 4:*
@@ -193,7 +194,7 @@ Q5: Is there a preferred model and if so, which one?
 >*Answer 5:*
 <br>
 
-The nice thing about AIC is that the models you compare do not have to be nested like they do for ANOVA, as long as the data are the same. There are a few other constraints however...
+The nice thing about AIC is that the models you compare do not have to be nested like they do for ANOVA, as long as the data are the same. There are a few other constraints however... 
 
 Here are the AIC scores for our pair of NLS models:
 
