@@ -1,6 +1,8 @@
 ---
 title: "Master script for postfire analysis"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -30,7 +32,7 @@ plot.NDVI(dat)
 Q1: This plot suggests that Fynbos greenness (NDVI) as observed from satellite saturates with time since fire. Why do you think it saturates rather than increasing linearly with time?
 
 >*Answer 1:*
-<br>
+I think NDVI doesnt increase linearly with time since fire, because fynbos establishes quite quickly initially post fire (e.g. adaptations such as resprouting and reseeding) and thus has a rapid increase in NDVI. The change in the plot steepness could be due to the NDVI saturating over denser vegetation. After an older post fire age, the ground cover of fynbos might remain similar (most of the area is covered already) and thus not show an increase in NDVI similar to that seen at a young post fire age. Another possible reason for the non-linearity and saturation could be because there is environmental variation in the fynbos landscapes. This plot shape might be due to differences in post fire succession that causes a non linear/saturting increase in NDVI. Every year post fire there will be different environmental, seasonal, anthropogencic etc. conditions that will influence the NDVI each year. Thus, some form of non linear increases would be expected. 
 
 ### 2. Fit models using Non-linear Least Squares (NLS)
 
@@ -88,8 +90,8 @@ Lots more parameters...
 
 Q2: How do the estimates for the common parameters compare?
 
->*Answer 2:*
-<br>
+>*Answer 2:* 
+Both the alpha and lambda estimates decrease in the full model, compared to the simple model (0.25 to 0.21; 1.18 to 0.99 respectively). In contrast, Gamma increases from the simple model to the full model (0.32 to 0.36). Therefore, gamma and lambda changed by less than alpha. 
 
 ### 3. Compare NLS models using ANOVA
 
@@ -106,10 +108,12 @@ anova(fit_negexp, fit_negexpS)
 Q3: Which model is better?
 
 >*Answer 3:*
+The results suggest that the full model is better at capturing the data than the simpler model. This is due to the full model resulting in a significant reduction in the residual sum of squares (RSS) (reduction from the simple model's RSS). i.e. the p-value is lower than 0.05 which means that the null hypothesis (simple model is better) is unlikely.  
+
 Q4: How many degrees of freedom are there in this ANOVA and why (i.e. what are they)?
 
 >*Answer 4:*
-<br>
+Degrees of freedom represent the difference in the number of parameters between the models. There are 268 degrees of freedom in total in this ANOVA (135, 133). Degrees of freedom are the number of subjects minus the number of treatments.
 
 ### 4. Fit models using Maximum Likelihood Estimation (MLE)
 
@@ -191,7 +195,8 @@ AIC_simple - AIC_full
 Q5: Is there a preferred model and if so, which one?
 
 >*Answer 5:*
-<br>
+From the AIC one can see that the full model has a lower AIC value. This suggests that the full model is preferred as it is 'better' than the simple model i.e. indicates the full model is a better-fit. Since the difference in AIC between the two models is very high, this relates to the models being significantly different (at an alpha of p<0.05). 
+
 
 The nice thing about AIC is that the models you compare do not have to be nested like they do for ANOVA, as long as the data are the same. There are a few other constraints however... 
 
@@ -208,4 +213,4 @@ You'll notice that these are completely different to the AICs for the MLE models
 Q6: Why is it not okay to compare the AIC of these NLS models with the AIC of the MLE models? Hint: type `?AIC` into the R console and do some reading.
 
 >*Answer 6:*
-<br>
+It is not okay to compare the AIC of these NLS models with the MLE models. You can only compare models that have been fitted to the same data i.e. where a response is transformed you can't compare the two models. This is because while AIC can be produced for models not using maximum likelihood, these models shouldn't be compared with those using maximum likelihood. 
